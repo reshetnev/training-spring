@@ -13,22 +13,20 @@ public class App {
 
     private EventLogger eventLogger;
 
-    private Event event;
-
-    public App(Client client, EventLogger eventLogger, Event event) {
+    public App(Client client, EventLogger eventLogger) {
         this.client = client;
         this.eventLogger = eventLogger;
-        this.event = event;
     }
 
-    private void logEvent(String msg) {
+    private void logEvent(Event event) {
 
+        String msg = event.getMsg();
         String message = msg.replaceAll(client.getId(), client.getFullName());
         event.setMsg(message);
         eventLogger.logEvent(event);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         @SuppressWarnings("resource")
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
@@ -36,7 +34,10 @@ public class App {
         App app = (App) ctx.getBean("app");
 
         for (int i = 1; i < 10 ; i++) {
-            app.logEvent("Some event for "+i);
+            Event event = (Event) ctx.getBean("event");
+            event.setMsg("Some event for "+i);
+            app.logEvent(event);
+            Thread.sleep(1000);
         }
     }
 

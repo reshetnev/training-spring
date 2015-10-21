@@ -12,7 +12,7 @@
 
     <bean id="event" class="com.epam.reshetnev.spring.core.beans.Event" scope="prototype">
         <constructor-arg>
-            <bean class="java.util.Date"/>
+            <bean class="java.util.Date" />
         </constructor-arg>
         <constructor-arg ref="dateFormat"/>
     </bean>
@@ -24,7 +24,6 @@
     <bean id="app" class="com.epam.reshetnev.spring.core.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
-        <constructor-arg ref="event"/>
     </bean>
 
 </beans>
