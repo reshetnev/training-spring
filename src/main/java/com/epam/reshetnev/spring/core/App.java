@@ -1,6 +1,8 @@
 package com.epam.reshetnev.spring.core;
 
-import org.springframework.context.ApplicationContext;
+import java.io.IOException;
+
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.epam.reshetnev.spring.core.beans.Client;
@@ -18,7 +20,7 @@ public class App {
         this.eventLogger = eventLogger;
     }
 
-    private void logEvent(Event event) {
+    private void logEvent(Event event) throws IOException {
 
         String msg = event.getMsg();
         String message = msg.replaceAll(client.getId(), client.getFullName());
@@ -26,10 +28,9 @@ public class App {
         eventLogger.logEvent(event);
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
-        @SuppressWarnings("resource")
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
         App app = (App) ctx.getBean("app");
 
@@ -39,6 +40,8 @@ public class App {
             app.logEvent(event);
             Thread.sleep(1000);
         }
+
+        ctx.close();
     }
 
 }
