@@ -1,7 +1,9 @@
 package com.epam.reshetnev.spring.core.beans;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Event {
@@ -10,14 +12,14 @@ public class Event {
 
     private String msg;
 
-    private Date date;
+    private LocalDateTime localDateTime;
 
-    private DateFormat df;
+    private DateTimeFormatter dtf;
 
-    public Event(Date date, DateFormat df) {
+    public Event(LocalDateTime localDateTime, DateTimeFormatter dtf) {
 
-        this.date = date;
-        this.df = df;
+        this.localDateTime = localDateTime;
+        this.dtf = dtf;
     }
 
     private static int getRandomNumberInRange(int min, int max) {
@@ -25,6 +27,15 @@ public class Event {
         Random r = new Random();
 
         return r.ints(min, (max + 1)).limit(1).findFirst().getAsInt();
+    }
+
+    public boolean isDay() {
+
+        LocalTime localTime = localDateTime.toLocalTime();
+
+        boolean result = ((localTime.getHour() >= 8)&&(localTime.getHour() <= 17));
+
+        return result;
     }
 
     public String getMsg() {
@@ -37,7 +48,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event [id=" + id + ", msg=" + msg + ", date=" + df.format(date) + "]";
+        return "Event [id: " + id + ", msg: " + msg + ", localDateTime: " + localDateTime.format(dtf) + "]";
     }
 
 }
