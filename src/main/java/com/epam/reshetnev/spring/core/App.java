@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.epam.reshetnev.spring.core.aspect.StatisticsAspect;
 import com.epam.reshetnev.spring.core.beans.Client;
 import com.epam.reshetnev.spring.core.beans.Event;
 import com.epam.reshetnev.spring.core.enums.EventType;
@@ -60,6 +61,9 @@ public class App {
             Thread.sleep(1000);
         }
 
+        StatisticsAspect statisticsAspect = ctx.getBean(StatisticsAspect.class);
+        System.out.println(statisticsAspect.getCounter().toString());
+        
         ctx.close();
     }
 

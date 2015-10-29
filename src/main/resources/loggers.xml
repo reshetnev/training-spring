@@ -17,7 +17,7 @@
     </bean>
 
     <bean id="dateTimeFormatter" class="java.time.format.DateTimeFormatter" factory-method="ofPattern">
-        <constructor-arg value="dd.mm.yyyy hh.mm.ss"/>
+        <constructor-arg value="dd.MM.yyyy HH.mm.ss"/>
     </bean>
 
     <bean id="consoleEventLogger" class="com.epam.reshetnev.spring.core.loggers.impl.ConsoleEventLogger"/>
