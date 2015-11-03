@@ -13,6 +13,7 @@
 >
 
     <import resource="loggers.xml"/>
+    <import resource="db.xml"/>
 
     <aop:aspectj-autoproxy />
     <bean id="logaspect" class="com.epam.reshetnev.spring.core.aspect.StatisticsAspect">
@@ -34,8 +35,8 @@
     <bean id="app" class="com.epam.reshetnev.spring.core.App">
         <constructor-arg ref="client"/>
         <property name="defaultLogger" value="#{event.isDay() ? fileEventLogger : consoleEventLogger}"/>
+        <property name="dbLogger" ref="dbLogger"/>
         <constructor-arg ref="loggerMap"/>
-        
     </bean>
 
     <!-- creates a java.util.Properties instance with values loaded from the supplied location -->
@@ -45,6 +46,7 @@
         <property name="locations">
             <list>
                 <value>classpath:client.properties</value>
+                <value>classpath:db.properties</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>

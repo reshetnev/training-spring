@@ -18,6 +18,8 @@ public class App {
 
     private EventLogger defaultLogger;
 
+    private EventLogger dbLogger;
+    
     private Map<EventType, EventLogger> loggers;
 
     public App(Client client, Map<EventType, EventLogger> loggers) {
@@ -31,6 +33,14 @@ public class App {
 
     public void setDefaultLogger(EventLogger defaultLogger) {
         this.defaultLogger = defaultLogger;
+    }
+
+    public EventLogger getDbLogger() {
+        return dbLogger;
+    }
+
+    public void setDbLogger(EventLogger dbLogger) {
+        this.dbLogger = dbLogger;
     }
 
     private void logEvent(Event event, EventType eventType) throws IOException {
@@ -58,6 +68,7 @@ public class App {
             Event event = (Event) ctx.getBean("event");
             event.setMsg("Some event for "+i);
             app.logEvent(event, null);
+            app.dbLogger.logEvent(event);
             Thread.sleep(1000);
         }
 

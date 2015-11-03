@@ -20,6 +20,10 @@
         <constructor-arg value="dd.MM.yyyy HH.mm.ss"/>
     </bean>
 
+    <bean id="dbLogger" class="com.epam.reshetnev.spring.core.loggers.impl.DBLogger">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
     <bean id="consoleEventLogger" class="com.epam.reshetnev.spring.core.loggers.impl.ConsoleEventLogger"/>
 
     <bean id="fileEventLogger" class="com.epam.reshetnev.spring.core.loggers.impl.FileEventLogger" init-method="init">
