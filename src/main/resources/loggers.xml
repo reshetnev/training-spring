@@ -22,6 +22,7 @@
 
     <bean id="dbLogger" class="com.epam.reshetnev.spring.core.loggers.impl.DBLogger">
         <constructor-arg ref="jdbcTemplate"/>
+        <constructor-arg ref="dateTimeFormatter"/>
     </bean>
 
     <bean id="consoleEventLogger" class="com.epam.reshetnev.spring.core.loggers.impl.ConsoleEventLogger"/>

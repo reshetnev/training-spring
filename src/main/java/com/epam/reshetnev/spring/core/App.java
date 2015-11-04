@@ -75,7 +75,7 @@ public class App {
         StatisticsAspect statisticsAspect = ctx.getBean(StatisticsAspect.class);
         System.out.println(statisticsAspect.getCounter().toString());
         
-        ctx.close();
+//        ctx.close();
     }
 
 }

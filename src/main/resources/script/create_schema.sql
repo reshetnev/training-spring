@@ -1,0 +1,1 @@
+CREATE TABLE event (id INT PRIMARY KEY , message VARCHAR(200));
